@@ -101,16 +101,39 @@ class PriorBox(Layer):
     
     
 img_size=(300,300)
+'''
+###featuremap size is 38,19,10,5,3,1(eg:VGG16)######
 default_box_layer1=PriorBox(img_size,30,[],aspect_ratios=[2],layer_shape=(38,38)).compute_default_box()
 default_box_layer2=PriorBox(img_size,60,114,aspect_ratios=[2,3],layer_shape=(19,19)).compute_default_box()
 default_box_layer3=PriorBox(img_size,114,168,aspect_ratios=[2,3],layer_shape=(10,10)).compute_default_box()
 default_box_layer4=PriorBox(img_size,168,222,aspect_ratios=[2,3],layer_shape=(5,5)).compute_default_box()
 default_box_layer5=PriorBox(img_size,222,276,aspect_ratios=[2,3],layer_shape=(3,3)).compute_default_box()
 default_box_layer6=PriorBox(img_size,276,330,aspect_ratios=[2,3],layer_shape=(1,1)).compute_default_box()
-
+'''
+'''
+###featuremap size is 19,10,5,3,2,1(eg:mobilnet,shufflenet,Xception)####
+default_box_layer1=PriorBox(img_size,60,[],aspect_ratios=[2],layer_shape=(19,19)).compute_default_box()
+default_box_layer2=PriorBox(img_size,105,150,aspect_ratios=[2,3],layer_shape=(10,10)).compute_default_box()
+default_box_layer3=PriorBox(img_size,150,195,aspect_ratios=[2,3],layer_shape=(5,5)).compute_default_box()
+default_box_layer4=PriorBox(img_size,195,240,aspect_ratios=[2,3],layer_shape=(3,3)).compute_default_box()
+default_box_layer5=PriorBox(img_size,240,285,aspect_ratios=[2,3],layer_shape=(2,2)).compute_default_box()
+default_box_layer6=PriorBox(img_size,285,300,aspect_ratios=[2,3],layer_shape=(1,1)).compute_default_box()
 default_box=np.concatenate((default_box_layer1,default_box_layer2,default_box_layer3,default_box_layer4,
                             default_box_layer5,default_box_layer6),axis=0) 
-pickle.dump(default_box,open("default_box_information.pkl","wb"))  
+pickle.dump(default_box,open("prior_boxes_ssd300ShuffleNetV2.pkl","wb"))  
+'''
+'''
+###featuremap size is 19,19,10,5,3,1(eg:peleenet)####
+default_box_layer1=PriorBox(img_size,30.4,[],aspect_ratios=[2],layer_shape=(19,19)).compute_default_box()
+default_box_layer2=PriorBox(img_size,60.8,112.5,aspect_ratios=[2,3],layer_shape=(19,19)).compute_default_box()
+default_box_layer3=PriorBox(img_size,112.5,164.2,aspect_ratios=[2,3],layer_shape=(10,10)).compute_default_box()
+default_box_layer4=PriorBox(img_size,164.2,215.8,aspect_ratios=[2,3],layer_shape=(5,5)).compute_default_box()
+default_box_layer5=PriorBox(img_size,215.8,267.4,aspect_ratios=[2,3],layer_shape=(3,3)).compute_default_box()
+default_box_layer6=PriorBox(img_size,267.4,300,aspect_ratios=[2,3],layer_shape=(1,1)).compute_default_box()
+default_box=np.concatenate((default_box_layer1,default_box_layer2,default_box_layer3,default_box_layer4,
+                            default_box_layer5,default_box_layer6),axis=0) 
+pickle.dump(default_box,open("prior_boxes_ssd300PeleeNet.pkl","wb"))
+'''
 
 '''
 priors1 = pickle.load(open('prior_boxes_ssd300.pkl', 'rb')) 
